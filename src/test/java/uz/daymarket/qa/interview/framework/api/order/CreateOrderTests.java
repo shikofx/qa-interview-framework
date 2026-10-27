@@ -1,4 +1,4 @@
-package uz.daymarket.QaInterviewFramework.orderApi;
+package uz.daymarket.qa.interview.framework.api.order;
 
 import apis.OrderApi.OrdersApi;
 import classes.OrderApi.Order;
@@ -7,9 +7,11 @@ import enums.OrderApi.OrderStatus;
 import okhttp3.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
 import utils.OrderApi.ClientUtils;
 import utils.OrderApi.OrderUtils;
-import uz.daymarket.QaInterviewFramework.BaseTest;
+import uz.daymarket.qa.interview.framework.extensions.LoggingSetupExtension;
 
 import java.util.List;
 
@@ -19,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static utils.OrderApi.OrderApiMappers.mapOrder;
 import static utils.OrderApi.OrderApiMappers.mapOrdersData;
 
-public class CreateOrderTests extends BaseTest {
+@ExtendWith(LoggingSetupExtension.class)
+public class CreateOrderTests {
 
     private ClientUtils clientUtils;
     private OrderUtils orderUtils;

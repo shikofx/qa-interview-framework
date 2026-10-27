@@ -19,7 +19,6 @@ public class LoggingOkHttpInterceptor implements Interceptor {
     @Override
     public @NotNull Response intercept(@NotNull Chain chain) throws IOException {
         Request request = chain.request();
-
         String requestBodyString = "";
         RequestBody requestBody = request.body();
         if (requestBody != null && requestBody.contentLength() > 0) {
