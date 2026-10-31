@@ -14,7 +14,7 @@ public class ClientUtils {
     @Step("Выбрать случайного клиента со статусом {status}")
     public Client getRandomClient(ClientStatus status) {
         List<Client> enabledClients = mapClients(new ClientsApi().getAllClients()).stream()
-                .filter(client -> client.getStatus().equals(ClientStatus.enabled)).toList();
+                .filter(client -> client.getStatus().equals(status)).toList();
         return enabledClients.get((int) (Math.random() * enabledClients.size()));
     }
 }
