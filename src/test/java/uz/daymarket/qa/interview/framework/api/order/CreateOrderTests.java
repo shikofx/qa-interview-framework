@@ -1,17 +1,11 @@
 package uz.daymarket.qa.interview.framework.api.order;
 
-import apis.OrderApi.OrdersApi;
 import classes.OrderApi.Order;
 import enums.OrderApi.ClientStatus;
 import enums.OrderApi.OrderStatus;
 import okhttp3.Response;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.Logger;
-import utils.OrderApi.ClientUtils;
-import utils.OrderApi.OrderUtils;
-import uz.daymarket.qa.interview.framework.extensions.LoggingSetupExtension;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -21,23 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static utils.OrderApi.OrderApiMappers.mapOrder;
 import static utils.OrderApi.OrderApiMappers.mapOrdersData;
 
-@ExtendWith(LoggingSetupExtension.class)
-public class CreateOrderTests {
+public class CreateOrderTests extends OrderBaseTest {
 
-    private ClientUtils clientUtils;
-    private OrderUtils orderUtils;
-    private OrdersApi orderApi;
-
-    @BeforeEach
-    public void setUp() {
-        clientUtils = new ClientUtils();
-        orderApi = new OrdersApi();
-        orderUtils = new OrderUtils();
-    }
-
-    @Test
-    public void createOrderTest() {
-        Number orderAmount = (long) (Math.random() * 1_000_000);
+    @ParameterizedTest
+    @ValueSource(doubles = {0.01, 1.0, 1000000.01})
+    public void createNewOrderTest(Double orderAmount) {
 
         Response createOrderResponse = orderApi.createOrder(
                 orderAmount, clientUtils.getRandomClient(ClientStatus.enabled).getClientId());
